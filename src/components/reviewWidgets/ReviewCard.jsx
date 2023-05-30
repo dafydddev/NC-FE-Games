@@ -11,7 +11,7 @@ function ReviewCard({ review }) {
         <li>Designer: {review.designer}</li>
         <li>Votes: {review.votes}</li>
       </ul>
-      <img src={review.review_img_url} />
+      <img src={review.review_img_url} alt="" />
     </>
   );
 }
