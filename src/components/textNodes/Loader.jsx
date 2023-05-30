@@ -1,5 +1,5 @@
-function Loader({ contentName }) {
-  return <div role="status">Loading {contentName}, please wait</div>;
+function Loader({ loaderText }) {
+  return <p role="status"> {loaderText}</p>;
 }
 
 export default Loader;
