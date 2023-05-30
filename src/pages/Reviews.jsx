@@ -17,12 +17,17 @@ function Reviews() {
   }, []);
   return (
     <>
-        <MainHeading headingText={pageName} />
-        {isLoading ? <Loader contentName={pageName} /> :
-            reviewData.map((review) => {
-                return <ReviewCard key={review.review_id} review={review} />;
-            })
-        }
+      <MainHeading headingText={pageName} />
+      {isLoading ? (
+        <Loader loaderText={`Loading ${pageName}, please wait`} />
+      ) : (
+        <>
+          <Loader loaderText={`${reviewData.length} reviews found`} />
+          {reviewData.map((review) => (
+            <ReviewCard key={review.review_id} review={review} />
+          ))}
+        </>
+      )}
     </>
   );
 }
