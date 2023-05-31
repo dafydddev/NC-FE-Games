@@ -5,7 +5,8 @@ import Header from "./components/regions/Header";
 import Footer from "./components/regions/Footer";
 
 import Home from "./pages/Home";
-import Reviews from "./pages/Reviews";
+import AllReviews from "./pages/AllReviews"
+import IndividualReview from "./pages/IndividualReview" 
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <main id="main" tabIndex="-1">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/reviews" element={<AllReviews />} />
+          <Route path="/reviews/:id" element={<IndividualReview />} />
         </Routes>
       </main>
       <Footer />
