@@ -1,6 +1,6 @@
 import { parseDate } from "../../utils/parseDate";
 
-function ReviewDetail({ review }) {
+function ReviewDetail({ review, votes}) {
   return (
     <>
       <ul>
@@ -8,7 +8,7 @@ function ReviewDetail({ review }) {
         <li>Owner: {review.owner}</li>
         <li>Category: {review.category}</li>
         <li>Designer: {review.designer}</li>
-        <li>Votes: {review.votes}</li>
+        <li>Votes: {votes}</li>
       </ul>
       <p>{review.review_body}</p>
       <img src={review.review_img_url} alt="" />

@@ -7,14 +7,22 @@ import MainHeading from "../components/textNodes/MainHeading";
 import Loader from "../components/textNodes/Loader";
 import ReviewDetail from "../components/reviewWidgets/ReviewDetail";
 import CommentsPanel from "../components/commentsWidgets/CommentsPanel";
+import VoteButtons from "../components/voteWidgets/voteButtons";
 
 function IndividualReview() {
   const { id } = useParams();
   const [reviewData, setReviewData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [voteCount, setVoteCount] = useState(0);
+
+  const updateVoteCount = (newVoteCount) => {
+    setVoteCount(newVoteCount);
+  };
+
   useEffect(() => {
     reviews.get(`/reviews/${id}`).then(({ data }) => {
       setReviewData(data);
+      setVoteCount(data.votes)
       setIsLoading(false);
     });
   }, []);
@@ -25,7 +33,8 @@ function IndividualReview() {
       ) : (
         <>
           <MainHeading headingText={reviewData.title} />
-          <ReviewDetail review={reviewData} />
+          <VoteButtons id={id} updateVoteCount={updateVoteCount} />
+          <ReviewDetail review={reviewData} votes={voteCount} />
           <CommentsPanel id={id} />
         </>
       )}
