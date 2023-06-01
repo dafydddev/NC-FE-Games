@@ -5,7 +5,8 @@ import reviews from "../api/api";
 
 import MainHeading from "../components/textNodes/MainHeading";
 import Loader from "../components/textNodes/Loader";
-import ReviewDetail from "../components/reviewWidgets/ReviewDetail"
+import ReviewDetail from "../components/reviewWidgets/ReviewDetail";
+import CommentsPanel from "../components/commentsWidgets/CommentsPanel";
 
 function IndividualReview() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ function IndividualReview() {
         <>
           <MainHeading headingText={reviewData.title} />
           <ReviewDetail review={reviewData} />
+          <CommentsPanel id={id} />
         </>
       )}
     </>
