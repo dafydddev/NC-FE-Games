@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user";
 
 import reviews from "../../api/api";
 
@@ -7,11 +9,13 @@ import CommentCard from "./CommentCard";
 import NewCommentForm from "./NewCommentForm";
 
 function CommentsPanel({ id }) {
+  const { user } = useContext(UserContext);
   const [commentVisibility, setCommentVisibility] = useState(false);
   const [commentData, setCommentData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [submittedComment, setSubmittedComment] = useState("");
+  const [deletedComment, setDeletedComment] = useState("");
 
   useEffect(() => {
     if (isButtonClicked) {
@@ -21,7 +25,7 @@ function CommentsPanel({ id }) {
         setIsLoading(false);
       });
     }
-  }, [isButtonClicked, submittedComment]);
+  }, [isButtonClicked, submittedComment, deletedComment]);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -50,6 +54,8 @@ function CommentsPanel({ id }) {
                   key={comment.comment_id}
                   comment={comment}
                   submittedComment={submittedComment}
+                  user={user.username}
+                  setDeletedComment={setDeletedComment}
                 />
               ))}
             </ul>

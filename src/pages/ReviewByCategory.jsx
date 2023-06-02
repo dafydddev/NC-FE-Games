@@ -5,6 +5,7 @@ import reviews from "../api/api";
 import MainHeading from "../components/textNodes/MainHeading";
 import ReviewCard from "../components/reviewWidgets/ReviewCard";
 import Loader from "../components/textNodes/Loader";
+import { parseCategorySlug } from "../utils/parseCategorySlug";
 
 function ReviewByCategory() {
   const { category } = useParams();
@@ -28,7 +29,7 @@ function ReviewByCategory() {
         <Loader loaderText={`Loading reviews, please wait`} />
       ) : (
         <>
-          <MainHeading headingText={`${category} Reviews`} />
+          <MainHeading headingText={`${parseCategorySlug(category)} Reviews`} />
           <Loader loaderText={`${reviewData.length} reviews found`} />
           {reviewData.map((review) => (
             <ReviewCard key={review.review_id} review={review} />

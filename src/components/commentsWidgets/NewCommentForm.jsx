@@ -1,7 +1,10 @@
 import { useState } from "react";
 import reviews from "../../api/api";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user";
 
 function NewCommentForm({ id, setSubmittedComment, isLoading, setIsLoading }) {
+  const { user } = useContext(UserContext);
   const [commentValue, setComment] = useState("");
 
   const handleSubmit = (event) => {
@@ -10,7 +13,7 @@ function NewCommentForm({ id, setSubmittedComment, isLoading, setIsLoading }) {
       setIsLoading(true);
       reviews
         .post(`/reviews/${id}/comments`, {
-          username: "jessjelly",
+          username: user.username,
           body: commentValue,
         })
         .then((response) => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import reviews from "../../api/api";
 import { Link } from "react-router-dom";
+import { parseCategorySlug } from "../../utils/parseCategorySlug";
 
 function ReviewCategoryNav() {
   const [categoryData, setCategoryData] = useState([]);
@@ -15,7 +16,7 @@ function ReviewCategoryNav() {
         return (
           <li key={category.slug}>
             <Link to={`/reviews/category/${category.slug}`}>
-              {category.slug}
+              {parseCategorySlug(category.slug)}
             </Link>
           </li>
         );

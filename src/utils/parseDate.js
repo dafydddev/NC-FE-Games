@@ -1,5 +1,5 @@
 export const parseDate = (dateString) => {
-    let date = dateString.slice(0, 10).split('-').reverse().join('-');
-    let time = dateString.slice(11, 16);
+    const date = dateString.slice(0, 10).split('-').reverse().join('-');
+    const time = dateString.slice(11, 16);
     return `${date} ${time}`;
 };
