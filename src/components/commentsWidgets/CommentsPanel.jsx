@@ -1,28 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import reviews from "../../api/api";
 
 import Loader from "../textNodes/Loader";
 import CommentCard from "./CommentCard";
+import NewCommentForm from "./NewCommentForm";
 
-function CommentsPanel({ id, updateVoteCount }) {
+function CommentsPanel({ id }) {
   const [commentVisibility, setCommentVisibility] = useState(false);
   const [commentData, setCommentData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [requestMade, setRequestMade] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [submittedComment, setSubmittedComment] = useState("");
 
   useEffect(() => {
-    if (commentData.length === 0 && !requestMade) {
+    if (isButtonClicked) {
+      setIsLoading(true);
       reviews.get(`/reviews/${id}/comments`).then(({ data }) => {
         setCommentData(data);
         setIsLoading(false);
-        setRequestMade(true);
       });
     }
-  }, [commentData, id, requestMade]);
+  }, [isButtonClicked, submittedComment]);
 
   const handleClick = (event) => {
     event.preventDefault();
+    setIsButtonClicked(true);
     setCommentVisibility(!commentVisibility);
   };
 
@@ -39,14 +42,27 @@ function CommentsPanel({ id, updateVoteCount }) {
         {isLoading ? (
           <Loader loaderText={`Loading comments, please wait`} />
         ) : commentData.length > 0 ? (
-          <ul>
-            {commentData.map((comment) => (
-              <CommentCard key={comment.comment_id} comment={comment} />
-            ))}
-          </ul>
+          <>
+            <Loader loaderText={`${commentData.length} comments found`} />
+            <ul>
+              {commentData.map((comment) => (
+                <CommentCard
+                  key={comment.comment_id}
+                  comment={comment}
+                  submittedComment={submittedComment}
+                />
+              ))}
+            </ul>
+          </>
         ) : (
           <div>No comments found</div>
         )}
+        <NewCommentForm
+          id={id}
+          setSubmittedComment={setSubmittedComment}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );
