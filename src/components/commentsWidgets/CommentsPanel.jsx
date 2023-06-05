@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/user";
+import { UserContext } from "../../contexts/User";
 
 import reviews from "../../api/api";
 

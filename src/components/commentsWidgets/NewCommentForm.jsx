@@ -1,7 +1,7 @@
 import { useState } from "react";
 import reviews from "../../api/api";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/user";
+import { UserContext } from "../../contexts/User";
 
 function NewCommentForm({ id, setSubmittedComment, isLoading, setIsLoading }) {
   const { user } = useContext(UserContext);
