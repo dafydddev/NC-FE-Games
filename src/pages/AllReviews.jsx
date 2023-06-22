@@ -4,7 +4,7 @@ import reviews from "../api/api";
 import MainHeading from "../components/textNodes/MainHeading";
 import ReviewCard from "../components/reviewWidgets/ReviewCard";
 import Loader from "../components/textNodes/Loader";
-import ReviewCategoryNav from "../components/reviewWidgets/reviewCategoryNav";
+import ReviewCategoryNav from "../components/reviewWidgets/ReviewCategoryNav";
 import ReviewFilterControls from "../components/reviewWidgets/ReviewFilterControls";
 
 function AllReviews() {
